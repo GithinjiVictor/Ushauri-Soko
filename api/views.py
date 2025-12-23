@@ -2,15 +2,19 @@ from rest_framework import viewsets
 from django.db.models import Max, Q
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, IsAdminUser, AllowAny
 from rest_framework.views import APIView
+from django.contrib.auth.models import User
 from .models import Market, Produce, PriceLog, SalesRecord
 from .serializers import (
     MarketSerializer,
     ProduceSerializer,
     PriceLogSerializer,
     SalesRecordSerializer,
+    UserSerializer,
+    CustomTokenObtainPairSerializer
 )
+from rest_framework_simplejwt.views import TokenObtainPairView
 from datetime import timedelta
 from django.utils import timezone
 
@@ -36,29 +40,33 @@ def latest_prices(request):
 
 # --- STANDARD VIEWSETS ---
 
+from .permissions import IsAdminOrReadOnly
+
+# --- STANDARD VIEWSETS ---
+
 class MarketViewSet(viewsets.ModelViewSet):
     queryset = Market.objects.all()
     serializer_class = MarketSerializer
-    # permission_classes = [IsAuthenticated]
+    permission_classes = [IsAdminOrReadOnly]
 
 class ProduceViewSet(viewsets.ModelViewSet):
     queryset = Produce.objects.all()
     serializer_class = ProduceSerializer
-    # permission_classes = [IsAuthenticated]
+    permission_classes = [IsAdminOrReadOnly]
 
 class PriceLogViewSet(viewsets.ModelViewSet):
     queryset = PriceLog.objects.all().order_by('-date')
     serializer_class = PriceLogSerializer
-    # permission_classes = [IsAuthenticated]
+    permission_classes = [IsAdminOrReadOnly]
 
 class SalesRecordViewSet(viewsets.ModelViewSet):
     queryset = SalesRecord.objects.all().order_by('-date')
     serializer_class = SalesRecordSerializer
-    # permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
 
 # --- NEW PREDICTION ENGINE (Simple Moving Average) ---
 class PriceForecastViewSet(viewsets.ViewSet):
-    # permission_classes = [IsAuthenticated] 
+    permission_classes = [IsAuthenticated] 
 
     def list(self, request):
         forecasts = []
@@ -95,7 +103,7 @@ class PriceForecastViewSet(viewsets.ViewSet):
 
 # --- FIXED VIEWSET (Renamed from LatestPricesView) ---
 class LatestPricesViewSet(viewsets.ViewSet):
-    # permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
     """
     A ViewSet for listing the latest prices.
     Inherits from viewsets.ViewSet to work with router or as_view({'get': 'list'}).
@@ -124,6 +132,15 @@ class LatestPricesViewSet(viewsets.ViewSet):
         serializer = PriceLogSerializer(latest_price_logs, many=True)
         return Response(serializer.data)
     
+
+    
+class CustomTokenObtainPairView(TokenObtainPairView):
+    serializer_class = CustomTokenObtainPairSerializer
+
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = [IsAdminUser]
 
 class BacktestViewSet(viewsets.ViewSet):
     permission_classes = [IsAuthenticated]

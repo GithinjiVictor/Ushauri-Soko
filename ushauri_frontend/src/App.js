@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useMemo } from "react";
 // Import Recharts (Removed unused LineChart imports)
-import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { AreaChart, Area, ResponsiveContainer, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
+import AdminDashboard from "./AdminDashboard";
 
 // --- CONFIGURATION ---
 const API_BASE_URL = "http://127.0.0.1:8000"; 
@@ -49,48 +50,48 @@ const LandingPage = ({ onLoginClick }) => {
     <div className="min-h-screen bg-stone-50 flex flex-col font-sans">
       <nav className="px-6 py-6 flex justify-between items-center max-w-7xl mx-auto w-full">
         <div className="flex items-center gap-2">
-            <div className="bg-emerald-600 p-2 rounded-lg text-white"><BarChart2 className="w-6 h-6" /></div>
-            <span className="font-black text-xl text-gray-900 tracking-tight">Ushauri Soko</span>
+            <div className="bg-emerald-600 p-2 rounded-xl text-white shadow-lg shadow-emerald-200"><BarChart2 className="w-6 h-6" /></div>
+            <span className="font-bold text-xl text-stone-800 tracking-tight">Ushauri Soko</span>
         </div>
-        <button onClick={onLoginClick} className="px-6 py-2.5 bg-white border border-stone-200 text-stone-700 font-bold rounded-full hover:bg-stone-100 transition-colors shadow-sm">
+        <button onClick={onLoginClick} className="px-6 py-2.5 bg-white border border-stone-200 text-stone-600 font-bold rounded-full hover:bg-stone-50 transition-colors shadow-sm hover:shadow-md">
             Login
         </button>
       </nav>
 
       <div className="flex-1 flex flex-col justify-center items-center text-center px-4 max-w-4xl mx-auto mt-6">
-        <span className="inline-block py-1 px-3 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold uppercase tracking-wider mb-6">Market Intelligence Platform</span>
-        <h1 className="text-5xl md:text-7xl font-black text-gray-900 mb-6 tracking-tight leading-tight">
+        <span className="inline-block py-1.5 px-4 rounded-full bg-emerald-50 text-emerald-800 text-xs font-bold uppercase tracking-wider mb-6 border border-emerald-100">Market Intelligence Platform</span>
+        <h1 className="text-5xl md:text-7xl font-bold text-stone-800 mb-6 tracking-tight leading-tight">
             Know the Price.<br/><span className="text-emerald-600">Sell for Profit.</span>
         </h1>
-        <p className="text-xl text-gray-500 mb-10 max-w-2xl leading-relaxed">
+        <p className="text-xl text-stone-500 mb-10 max-w-2xl leading-relaxed">
             Ushauri Soko gives farmers clear, actionable advice on where to sell produce to maximize net income after transport costs.
         </p>
         <div className="flex gap-4 flex-col sm:flex-row">
-            <button onClick={onLoginClick} className="px-8 py-4 bg-emerald-600 text-white font-bold rounded-full text-lg shadow-xl shadow-emerald-200 hover:bg-emerald-700 transition-transform active:scale-95 flex items-center justify-center gap-2">
+            <button onClick={onLoginClick} className="px-8 py-4 bg-emerald-600 text-white font-bold rounded-2xl text-lg shadow-xl shadow-emerald-200 hover:bg-emerald-700 transition-transform active:scale-95 flex items-center justify-center gap-2">
                 Get Started <ArrowUpRight className="w-5 h-5"/>
             </button>
         </div>
       </div>
 
       <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto w-full px-6 py-20">
-          <div className="bg-white p-8 rounded-3xl shadow-sm border border-stone-100">
+          <div className="bg-white p-8 rounded-3xl shadow-[0_2px_8px_rgba(0,0,0,0.04)] border border-stone-100 hover:shadow-lg transition-all duration-300">
               <div className="bg-orange-50 w-14 h-14 rounded-2xl flex items-center justify-center text-orange-600 mb-6"><TrendingUp className="w-7 h-7"/></div>
-              <h3 className="text-xl font-bold text-gray-900 mb-2">Price Trends</h3>
-              <p className="text-gray-500">Know if prices are rising or falling before you harvest.</p>
+              <h3 className="text-xl font-bold text-stone-800 mb-2">Price Trends</h3>
+              <p className="text-stone-500">Know if prices are rising or falling before you harvest.</p>
           </div>
-          <div className="bg-white p-8 rounded-3xl shadow-sm border border-stone-100">
+          <div className="bg-white p-8 rounded-3xl shadow-[0_2px_8px_rgba(0,0,0,0.04)] border border-stone-100 hover:shadow-lg transition-all duration-300">
               <div className="bg-blue-50 w-14 h-14 rounded-2xl flex items-center justify-center text-blue-600 mb-6"><MapPin className="w-7 h-7"/></div>
-              <h3 className="text-xl font-bold text-gray-900 mb-2">Best Market Finder</h3>
-              <p className="text-gray-500">We calculate transport fees to show you the <b>real</b> best market.</p>
+              <h3 className="text-xl font-bold text-stone-800 mb-2">Best Market Finder</h3>
+              <p className="text-stone-500">We calculate transport fees to show you the <b>real</b> best market.</p>
           </div>
-          <div className="bg-white p-8 rounded-3xl shadow-sm border border-stone-100">
+          <div className="bg-white p-8 rounded-3xl shadow-[0_2px_8px_rgba(0,0,0,0.04)] border border-stone-100 hover:shadow-lg transition-all duration-300">
               <div className="bg-emerald-50 w-14 h-14 rounded-2xl flex items-center justify-center text-emerald-600 mb-6"><Briefcase className="w-7 h-7"/></div>
-              <h3 className="text-xl font-bold text-gray-900 mb-2">Profit Ledger</h3>
-              <p className="text-gray-500">Track your sales and revenue. Move away from paper notebooks.</p>
+              <h3 className="text-xl font-bold text-stone-800 mb-2">Profit Ledger</h3>
+              <p className="text-stone-500">Track your sales and revenue. Move away from paper notebooks.</p>
           </div>
       </div>
       
-      <div className="text-center pb-8 text-gray-400 text-sm">
+      <div className="text-center pb-8 text-stone-400 text-sm">
         © {new Date().getFullYear()} Ushauri Soko. Empowering Farmers.
       </div>
     </div>
@@ -116,7 +117,12 @@ const LoginScreen = ({ onLogin }) => {
         body: JSON.stringify({ username, password }),
       });
       const data = await response.json();
-      if (response.ok) { onLogin(data.access, username); } else { setError("Invalid username or password"); }
+      if (response.ok) { 
+          // FIX: Pass is_staff to handler
+          onLogin(data.access, username, data.is_staff); 
+      } else { 
+          setError("Invalid username or password"); 
+      }
     } catch (err) { setError("Server connection failed. Is Django running?"); } finally { setIsLoading(false); }
   };
 
@@ -124,16 +130,20 @@ const LoginScreen = ({ onLogin }) => {
     <div className="min-h-screen bg-stone-50 flex items-center justify-center p-4 font-sans">
       <div className="bg-white max-w-md w-full rounded-3xl shadow-xl p-8 border border-stone-100">
         <div className="text-center mb-8">
-          <div className="bg-emerald-100 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4 text-emerald-600"><BarChart2 className="w-8 h-8" /></div>
-          <h1 className="text-2xl font-black text-gray-900">Ushauri Soko</h1>
-          <p className="text-gray-500 text-sm mt-1">Market Intelligence Login</p>
+          <div className="bg-emerald-50 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4 text-emerald-600"><BarChart2 className="w-8 h-8" /></div>
+          <h1 className="text-2xl font-bold text-stone-800">Ushauri Soko</h1>
+          <p className="text-stone-500 text-sm mt-1">Market Intelligence Login</p>
         </div>
         <form onSubmit={handleSubmit} className="space-y-6">
-          <div className="space-y-2"><label className="text-xs font-bold text-gray-400 uppercase tracking-wider">Username</label><input type="text" value={username} onChange={(e) => setUsername(e.target.value)} className="w-full px-4 py-3 rounded-xl bg-gray-50 border-gray-200 border focus:bg-white focus:ring-2 focus:ring-emerald-500 focus:outline-none transition-all font-medium text-gray-800" placeholder="Enter your username" required /></div>
-          <div className="space-y-2"><label className="text-xs font-bold text-gray-400 uppercase tracking-wider">Password</label><input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className="w-full px-4 py-3 rounded-xl bg-gray-50 border-gray-200 border focus:bg-white focus:ring-2 focus:ring-emerald-500 focus:outline-none transition-all font-medium text-gray-800" placeholder="••••••••" required /></div>
+          <div className="space-y-2"><label className="text-xs font-bold text-stone-400 uppercase tracking-wider">Username</label><input type="text" value={username} onChange={(e) => setUsername(e.target.value)} className="w-full px-4 py-3 rounded-2xl bg-stone-50 border-stone-200 border focus:bg-white focus:ring-2 focus:ring-emerald-500 focus:outline-none transition-all font-medium text-stone-800" placeholder="Enter your username" required /></div>
+          <div className="space-y-2"><label className="text-xs font-bold text-stone-400 uppercase tracking-wider">Password</label><input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className="w-full px-4 py-3 rounded-2xl bg-stone-50 border-stone-200 border focus:bg-white focus:ring-2 focus:ring-emerald-500 focus:outline-none transition-all font-medium text-stone-800" placeholder="••••••••" required /></div>
           {error && <div className="bg-red-50 text-red-600 p-3 rounded-lg text-sm font-medium flex items-center gap-2"><X className="w-4 h-4" /> {error}</div>}
-          <button type="submit" disabled={isLoading} className="w-full py-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl shadow-lg shadow-emerald-200 transition-all flex items-center justify-center gap-2">{isLoading ? "Signing in..." : "Login"}</button>
+          <button type="submit" disabled={isLoading} className="w-full py-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-2xl shadow-lg shadow-emerald-200 transition-all flex items-center justify-center gap-2">{isLoading ? "Signing in..." : "Login"}</button>
         </form>
+        <div className="mt-8 pt-8 border-t border-stone-100 text-center">
+            <p className="text-stone-500 text-sm">Don't have an account?</p>
+            <p className="text-emerald-600 font-bold text-sm mt-1">Contact your Administrator to get access.</p>
+        </div>
       </div>
     </div>
   );
@@ -175,7 +185,7 @@ const RecordSaleModal = ({ isOpen, onClose, saleData, token }) => {
         <form onSubmit={handleSubmit} className="p-8 space-y-6">
           <div className="grid grid-cols-2 gap-4"><div className="space-y-1"><label className="text-[10px] font-bold text-gray-400 uppercase">Produce</label><div className="font-bold bg-stone-50 p-3 rounded-lg">{saleData.produce}</div></div><div className="space-y-1"><label className="text-[10px] font-bold text-gray-400 uppercase">Market</label><div className="font-bold bg-stone-50 p-3 rounded-lg">{saleData.market}</div></div></div>
           <div className="space-y-1"><label className="text-[10px] font-bold text-gray-400 uppercase">Quantity</label><div className="font-bold bg-stone-50 p-3 rounded-lg">{saleData.quantity} Kgs</div></div>
-          <div className="bg-emerald-50 p-4 rounded-xl flex justify-between"><span className="text-sm font-bold text-emerald-800">Net Profit</span><span className="text-xl font-black text-emerald-700">KES {Number(saleData.profit).toLocaleString()}</span></div>
+          <div className="bg-emerald-50 p-4 rounded-xl flex justify-between"><span className="text-sm font-bold text-emerald-800">Pesa Mfukoni <span className="text-[10px] opacity-70 block">(Net Profit)</span></span><span className="text-xl font-bold text-emerald-700">KES {Number(saleData.profit).toLocaleString(undefined, {maximumFractionDigits: 0})}</span></div>
           <div className="pt-2 flex gap-3"><button type="button" onClick={onClose} className="flex-1 py-3.5 font-bold text-gray-500 hover:bg-gray-50 rounded-xl transition-colors" disabled={isSubmitting}>Cancel</button><button type="submit" disabled={isSubmitting} className="flex-1 py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl shadow-lg transition-all flex items-center justify-center gap-2">{isSubmitting ? <span>Saving...</span> : <><CheckCircle className="w-5 h-5" /> Confirm</>}</button></div>
         </form>
       </div>
@@ -210,17 +220,29 @@ const DashboardTab = ({ markets, prices, sales, forecasts, logs }) => {
 
     return (
         <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+            {/* Header with Date */}
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div>
+                    <h2 className="text-2xl font-bold text-stone-900 tracking-tight">Today's Overview</h2>
+                    <p className="text-stone-500 text-sm">Real-time market insights. <span className="italic text-stone-400">- (Habari za Soko)</span></p>
+                </div>
+                <div className="bg-white px-5 py-2 rounded-xl shadow-sm border border-stone-100 text-emerald-700 font-bold flex items-center gap-2">
+                    <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
+                    {new Date().toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' })}
+                </div>
+            </div>
+
             {/* Summary Cards */}
             <div className="grid grid-cols-2 gap-4">
                 <div className="bg-white p-6 rounded-3xl shadow-sm border border-stone-100">
                     <p className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Market Alert</p>
                     {topMarket ? (
                         <div>
-                             <p className="text-sm text-gray-500">Highest price today:</p>
-                             <p className="text-xl font-black text-gray-900 mt-1">{topMarket.market_name}</p>
+                             <p className="text-sm text-stone-500">Highest price today:</p>
+                             <p className="text-xl font-bold text-stone-900 mt-1">{topMarket.market_name}</p>
                              <p className="text-emerald-600 font-bold text-sm">KES {Number(topMarket.price).toFixed(0)} ({topMarket.produce_name})</p>
                         </div>
-                    ) : <p className="text-gray-400">Loading...</p>}
+                    ) : <p className="text-stone-400">Loading...</p>}
                 </div>
                  <div className="bg-emerald-900 p-6 rounded-3xl shadow-lg text-white relative overflow-hidden flex flex-col justify-center">
                     <div className="relative z-10">
@@ -250,8 +272,8 @@ const DashboardTab = ({ markets, prices, sales, forecasts, logs }) => {
                                 </div>
                             </div>
                             <div className="text-right hidden sm:block">
-                                <p className="text-xs text-gray-400 font-bold uppercase">Forecast</p>
-                                <p className={`text-xl font-black ${insight.change > 0 ? 'text-emerald-600' : insight.change < 0 ? 'text-red-600' : 'text-yellow-600'}`}>
+                                <p className="text-xs text-stone-400 font-bold uppercase">Forecast</p>
+                                <p className={`text-xl font-bold ${insight.change > 0 ? 'text-emerald-600' : insight.change < 0 ? 'text-red-600' : 'text-yellow-600'}`}>
                                     KES {insight.predictedPrice.toFixed(0)}
                                 </p>
                             </div>
@@ -270,15 +292,15 @@ const MarketsTab = ({ markets, loading }) => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 animate-in fade-in duration-500">
       {markets.map((m) => (
-        <div key={m.id} className="bg-white rounded-2xl shadow-sm border border-stone-100 p-6 flex flex-col relative overflow-hidden hover:shadow-md transition-shadow">
-            <div className="absolute top-0 right-0 p-4 opacity-10"><Truck className="w-16 h-16 text-emerald-800" /></div>
-            <div className="flex items-center gap-3 mb-4">
-              <div className="bg-emerald-50 p-2.5 rounded-xl text-emerald-700"><MapPin className="w-6 h-6" /></div>
-              <h3 className="text-xl font-bold text-gray-800">{m.name}</h3>
+        <div key={m.id} className="bg-white rounded-3xl shadow-sm border border-stone-100 p-8 flex flex-col relative overflow-hidden hover:shadow-lg transition-all duration-300 group">
+            <div className="absolute top-0 right-0 p-6 opacity-5 group-hover:opacity-10 transition-opacity"><Truck className="w-24 h-24 text-emerald-900" /></div>
+            <div className="flex items-center gap-4 mb-6">
+              <div className="bg-emerald-50 p-3 rounded-2xl text-emerald-700"><MapPin className="w-6 h-6" /></div>
+              <h3 className="text-2xl font-bold text-stone-900 tracking-tight">{m.name}</h3>
             </div>
-            <div className="space-y-3 text-sm">
-                <div className="flex justify-between p-2 bg-stone-50 rounded-lg"><span className="text-gray-500 font-medium">Transport Cost</span><span className="font-bold text-gray-900">KES {Number(m.transport_cost).toLocaleString()}</span></div>
-                <div className="flex justify-between p-2 bg-stone-50 rounded-lg"><span className="text-gray-500 font-medium">Market Fee</span><span className="font-bold text-gray-900">KES {Number(m.market_fee).toLocaleString()}</span></div>
+            <div className="space-y-4 text-sm mt-auto">
+                <div className="flex justify-between items-center p-3 bg-stone-50 rounded-xl"><span className="text-stone-500 font-bold uppercase text-xs tracking-wide">Transport</span><span className="font-bold text-stone-900 text-base">KES {Number(m.transport_cost).toLocaleString()}</span></div>
+                <div className="flex justify-between items-center p-3 bg-stone-50 rounded-xl"><span className="text-stone-500 font-bold uppercase text-xs tracking-wide">Market Fee</span><span className="font-bold text-stone-900 text-base">KES {Number(m.market_fee).toLocaleString()}</span></div>
             </div>
         </div>
       ))}
@@ -297,22 +319,29 @@ const PricesTab = ({ prices, loading }) => {
     acc[prod].push(item);
     return acc;
   }, {});
+  
+  // Usability Fix: Sort items by Price Descending (Highest First)
+  Object.keys(grouped).forEach(key => {
+    grouped[key].sort((a, b) => Number(b.price) - Number(a.price));
+  });
 
   return (
     <div className="space-y-8 animate-in fade-in duration-500">
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {Object.entries(grouped).map(([prod, items]) => (
-                <div key={prod} className="bg-white rounded-2xl shadow-sm border border-stone-100 p-6">
-                    <div className="flex items-center gap-3 mb-4 pb-2 border-b border-stone-100">
-                        <div className="bg-orange-50 p-2 rounded-lg text-orange-600"><ShoppingCart className="w-5 h-5"/></div>
-                        <h3 className="font-bold text-lg text-gray-800">{prod}</h3>
+                <div key={prod} className="bg-white rounded-3xl shadow-sm border border-stone-100 p-6 hover:border-emerald-200 transition-colors">
+                    <div className="flex items-center gap-3 mb-6 pb-4 border-b border-stone-100">
+                        <div className="bg-orange-50 p-2.5 rounded-xl text-orange-600"><ShoppingCart className="w-5 h-5"/></div>
+                        <h3 className="font-bold text-xl text-stone-900 tracking-tight">{prod}</h3>
                     </div>
+                    <div className="space-y-2">
                     {items.map((i, idx) => (
-                        <div key={idx} className="flex justify-between text-sm py-3 border-b border-gray-50 last:border-0 hover:bg-stone-50 px-2 rounded-lg transition-colors">
-                            <span className="text-gray-600 font-medium">{i.market_name}</span>
-                            <span className="font-bold text-gray-900 bg-emerald-50 px-2 py-0.5 rounded text-emerald-700">KES {Number(i.price).toFixed(0)}</span>
+                        <div key={idx} className="flex justify-between items-center text-sm py-3 px-4 hover:bg-stone-50 rounded-xl transition-colors group">
+                            <span className="text-stone-600 font-bold group-hover:text-stone-900 transition-colors">{i.market_name}</span>
+                            <span className="font-bold text-emerald-700 bg-emerald-50 px-3 py-1 rounded-lg">KES {Number(i.price).toFixed(0)}</span>
                         </div>
                     ))}
+                    </div>
                 </div>
             ))}
         </div>
@@ -321,26 +350,56 @@ const PricesTab = ({ prices, loading }) => {
 };
 
 // 4. TRENDS TAB (Chart-Lite)
+const CustomTooltip = ({ active, payload, label }) => {
+    if (active && payload && payload.length) {
+        return (
+            <div className="bg-white p-4 rounded-xl shadow-lg border border-stone-100">
+                <p className="text-xs font-bold text-stone-400 uppercase tracking-wider mb-1">{new Date(label).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' })}</p>
+                <p className="text-lg font-bold text-emerald-600">KES {payload[0].value.toFixed(0)}</p>
+                {payload[0].payload.type === 'forecast' && <p className="text-[10px] font-bold text-emerald-400 uppercase tracking-widest mt-1">Forecast</p>}
+            </div>
+        );
+    }
+    return null;
+};
+
 const TrendsTab = ({ logs, forecasts }) => {
   const [selectedProduce, setSelectedProduce] = useState("");
+  const [selectedMarket, setSelectedMarket] = useState("");
+  
   const produceOptions = useMemo(() => [...new Set(logs.map(l => l.produce_name || l.produce))].filter(Boolean), [logs]);
+  const marketOptions = useMemo(() => {
+    if (!selectedProduce) return [];
+    const relevantLogs = logs.filter(l => (l.produce_name || l.produce) === selectedProduce);
+    return [...new Set(relevantLogs.map(l => l.market_name || l.market))].filter(Boolean);
+  }, [logs, selectedProduce]);
   
   useEffect(() => { 
     if (produceOptions.length > 0 && !selectedProduce) setSelectedProduce(produceOptions[0]); 
   }, [produceOptions, selectedProduce]);
 
+  useEffect(() => {
+    if (marketOptions.length > 0 && (!selectedMarket || !marketOptions.includes(selectedMarket))) {
+        setSelectedMarket(marketOptions[0]);
+    }
+  }, [marketOptions, selectedMarket]);
+
   // Determine trend status based on forecast
   const trendAnalysis = useMemo(() => {
-    if (!selectedProduce) return null;
+    if (!selectedProduce || !selectedMarket) return null;
 
     // Get current price (most recent log)
-    const productLogs = logs.filter(l => (l.produce_name || l.produce) === selectedProduce)
+    const productLogs = logs.filter(l => (l.produce_name || l.produce) === selectedProduce && (l.market_name || l.market) === selectedMarket)
                             .sort((a, b) => new Date(b.date) - new Date(a.date));
     const currentLog = productLogs[0];
     const currentPrice = currentLog ? Number(currentLog.price) : 0;
     
     // Get forecast price
-    const productForecast = (forecasts || []).find(f => f.produce === selectedProduce);
+    const productForecast = (forecasts || []).find(f => 
+        f && 
+        String(f.produce).trim() === String(selectedProduce).trim() && 
+        String(f.market).trim() === String(selectedMarket).trim()
+    );
     const predictedPrice = productForecast ? Number(productForecast.predicted_price) : 0;
     // Handle date format differences (ISO vs YYYY-MM-DD)
     const forecastDate = productForecast && productForecast.date ? productForecast.date.split('T')[0] : "Next Week";
@@ -353,7 +412,7 @@ const TrendsTab = ({ logs, forecasts }) => {
     let status = "Stable";
     let colorClass = "bg-yellow-100 text-yellow-800 border-yellow-200";
     let icon = <Minus className="w-8 h-8" />;
-    let message = `${selectedProduce} prices are STABLE.`;
+    let message = `${selectedProduce} prices in ${selectedMarket} are STABLE.`;
     let subMessage = "No major changes expected.";
     let swahili = "Bei imetulia.";
 
@@ -361,14 +420,14 @@ const TrendsTab = ({ logs, forecasts }) => {
         status = "Rising";
         colorClass = "bg-emerald-100 text-emerald-800 border-emerald-200";
         icon = <TrendingUp className="w-8 h-8 text-emerald-600" />;
-        message = `${selectedProduce} prices are RISING. Good time to sell!`;
+        message = `${selectedProduce} prices in ${selectedMarket} are RISING. Good time to sell!`;
         subMessage = "High demand expected next week.";
         swahili = "Bei zinapanda wiki ijayo.";
     } else if (percentChange < -1) {
         status = "Falling";
         colorClass = "bg-red-100 text-red-800 border-red-200";
         icon = <TrendingDown className="w-8 h-8 text-red-600" />;
-        message = `${selectedProduce} prices are FALLING.`;
+        message = `${selectedProduce} prices in ${selectedMarket} are FALLING.`;
         subMessage = "Consider holding stock if possible.";
         swahili = "Bei zinashuka wiki ijayo.";
     }
@@ -376,6 +435,7 @@ const TrendsTab = ({ logs, forecasts }) => {
     return { 
         currentPrice, 
         predictedPrice, 
+        market: selectedMarket,
         diff, 
         percentChange, 
         status, 
@@ -386,39 +446,75 @@ const TrendsTab = ({ logs, forecasts }) => {
         swahili,
         forecastDate
     };
-  }, [logs, forecasts, selectedProduce]);
+  }, [logs, forecasts, selectedProduce, selectedMarket]);
 
   // Simplified Sparkline Data
   const chartData = useMemo(() => {
-    if (!selectedProduce) return [];
-    const productLogs = logs.filter(l => (l.produce_name || l.produce) === selectedProduce)
-                            .sort((a, b) => new Date(a.date) - new Date(b.date));
+    if (!selectedProduce || !selectedMarket) return [];
     
-    // Take last 7 days only
-    const recentLogs = productLogs.slice(0, 7).reverse().map(log => ({
-        date: log.date,
+    // 1. Filter by produce AND market
+    const productLogs = logs.filter(l => (l.produce_name || l.produce) === selectedProduce && (l.market_name || l.market) === selectedMarket);
+
+    // 2. Group by Date to handle multiple entries on same day (take latest/max)
+    const dailyMap = new Map();
+    productLogs.forEach(log => {
+        // Assume date is 'YYYY-MM-DD' or ISO. normalize to day.
+        const day = log.date.split('T')[0];
+        // If multiple, overwrite (effectively taking the last one processed, or we could avg)
+        // Since we want the latest state, just taking one is fine for now, or max price.
+        // Let's stick to simple "latest recorded" for that day.
+        if (!dailyMap.has(day)) {
+            dailyMap.set(day, log);
+        }
+    });
+
+    // 3. Convert back to array and Sort Descending (Newest First)
+    const uniqueDays = Array.from(dailyMap.values())
+        .sort((a, b) => new Date(b.date) - new Date(a.date));
+    
+    // 4. Take top 7 (Newest Unique Days) and Reverse for Chart
+    const recentLogs = uniqueDays.slice(0, 7).reverse().map(log => ({
+        date: log.date.split('T')[0],
         price: Number(log.price),
         type: 'history'
     }));
 
+    // 5. Add Forecast Point
     if (trendAnalysis && trendAnalysis.predictedPrice) {
         recentLogs.push({
-            date: trendAnalysis.forecastDate,
+            date: trendAnalysis.forecastDate, // Forecast date is already future
             price: trendAnalysis.predictedPrice,
             type: 'forecast'
         });
     }
     return recentLogs;
-  }, [logs, trendAnalysis, selectedProduce]);
+  }, [logs, trendAnalysis, selectedProduce, selectedMarket]);
 
   if (logs.length === 0) return <div className="bg-white rounded-2xl p-12 text-center text-gray-400 border border-dashed border-stone-200">No historical data available.</div>;
 
   return (
     <div className="space-y-8 animate-in fade-in duration-500">
-      <div className="flex flex-wrap gap-2 p-1.5 bg-stone-100 rounded-xl w-fit">
-        {produceOptions.map(opt => (
-            <button key={opt} onClick={() => setSelectedProduce(opt)} className={`px-5 py-2 rounded-lg text-sm font-bold transition-all shadow-sm ${selectedProduce === opt ? "bg-white text-emerald-800 ring-1 ring-black/5" : "text-gray-500 hover:text-gray-900 hover:bg-white/50 shadow-none"}`}>{opt}</button>
-        ))}
+      <div className="flex flex-col md:flex-row gap-4 items-center mb-6">
+        <div className="flex flex-wrap gap-2 p-1.5 bg-stone-100 rounded-xl w-fit">
+            {produceOptions.map(opt => (
+                <button key={opt} onClick={() => setSelectedProduce(opt)} className={`px-5 py-2 rounded-lg text-sm font-bold transition-all shadow-sm ${selectedProduce === opt ? "bg-white text-emerald-800 ring-1 ring-black/5" : "text-gray-500 hover:text-gray-900 hover:bg-white/50 shadow-none"}`}>{opt}</button>
+            ))}
+        </div>
+        
+        {marketOptions.length > 0 && (
+        <div className="flex items-center gap-2 bg-stone-100 p-1.5 rounded-xl">
+             <span className="text-xs font-bold text-stone-400 uppercase ml-2 mr-1">Market:</span>
+             <select 
+                value={selectedMarket} 
+                onChange={(e) => setSelectedMarket(e.target.value)}
+                className="bg-white text-sm font-bold text-stone-700 py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 shadow-sm border-r-8 border-transparent"
+             >
+                {marketOptions.map(m => (
+                    <option key={m} value={m}>{m}</option>
+                ))}
+             </select>
+        </div>
+        )}
       </div>
 
       {trendAnalysis && (
@@ -428,20 +524,20 @@ const TrendsTab = ({ logs, forecasts }) => {
               <div>
                   <div className="flex items-center gap-2 mb-4">
                       <div className="bg-white/60 p-2 rounded-full backdrop-blur-sm shadow-sm">{trendAnalysis.icon}</div>
-                      <span className="font-black text-sm uppercase tracking-widest opacity-80">{trendAnalysis.status} Trend</span>
+                      <span className="font-bold text-sm uppercase tracking-widest opacity-80">{trendAnalysis.status} Trend</span>
                   </div>
-                  <h2 className="text-3xl font-black leading-tight mb-2">{trendAnalysis.message}</h2>
+                  <h2 className="text-3xl font-bold leading-tight mb-2">{trendAnalysis.message}</h2>
                   <p className="text-lg opacity-80 font-medium italic">"{trendAnalysis.swahili}"</p>
               </div>
               <div className="mt-8 pt-8 border-t border-black/5 grid grid-cols-2 gap-4">
                   <div className="bg-white/50 rounded-2xl p-4">
                       <p className="text-xs font-bold uppercase tracking-wider opacity-60 mb-1">Today</p>
-                      <p className="text-2xl font-black">KES {trendAnalysis.currentPrice.toFixed(0)}</p>
+                      <p className="text-2xl font-bold">KES {trendAnalysis.currentPrice.toFixed(0)}</p>
                   </div>
                   <div className="bg-white rounded-2xl p-4 shadow-sm border border-white/50">
                       <p className="text-xs font-bold uppercase tracking-wider opacity-60 mb-1">Forecast</p>
                       <div className="flex items-baseline gap-2">
-                        <p className="text-2xl font-black">KES {trendAnalysis.predictedPrice.toFixed(0)}</p>
+                        <p className="text-2xl font-bold">KES {trendAnalysis.predictedPrice.toFixed(0)}</p>
                         <span className={`text-xs font-bold px-1.5 py-0.5 rounded ${trendAnalysis.diff > 0 ? 'bg-emerald-100 text-emerald-700' : 'bg-red-100 text-red-700'}`}>{trendAnalysis.diff > 0 ? '+' : ''}{trendAnalysis.percentChange}%</span>
                       </div>
                   </div>
@@ -456,31 +552,52 @@ const TrendsTab = ({ logs, forecasts }) => {
                
                <div className="flex items-center justify-between px-4 mb-8">
                     <div className="text-center">
-                        <p className="text-xs text-gray-400 font-bold uppercase">Start</p>
-                        <p className="font-bold text-gray-600">KES {chartData[0]?.price.toFixed(0)}</p>
+                        <p className="text-xs text-stone-400 font-bold uppercase">Start</p>
+                        <p className="font-bold text-stone-600">KES {chartData[0]?.price.toFixed(0)}</p>
                     </div>
                     <ArrowRight className="w-6 h-6 text-stone-300" />
                     <div className="text-center">
-                        <p className="text-xs text-gray-400 font-bold uppercase">Today</p>
-                        <p className="font-bold text-gray-800">KES {trendAnalysis.currentPrice.toFixed(0)}</p>
+                        <p className="text-xs text-stone-400 font-bold uppercase">Today</p>
+                        <p className="font-bold text-stone-800">KES {trendAnalysis.currentPrice.toFixed(0)}</p>
                     </div>
                     <ArrowRight className={`w-6 h-6 ${trendAnalysis.diff > 0 ? 'text-emerald-400' : 'text-red-400'}`} />
                     <div className="text-center">
                         <p className="text-xs text-emerald-600 font-bold uppercase">Forecast</p>
-                        <p className={`font-black text-xl ${trendAnalysis.diff > 0 ? 'text-emerald-600' : 'text-red-600'}`}>KES {trendAnalysis.predictedPrice.toFixed(0)}</p>
+                        <p className={`font-bold text-xl ${trendAnalysis.diff > 0 ? 'text-emerald-600' : 'text-red-600'}`}>KES {trendAnalysis.predictedPrice.toFixed(0)}</p>
                     </div>
                </div>
 
                <div className="flex-1 min-h-[150px] w-full">
                 <ResponsiveContainer width="100%" height="100%">
-                    <AreaChart data={chartData}>
+                    <AreaChart data={chartData} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
                         <defs>
                             <linearGradient id="colorTrend" x1="0" y1="0" x2="1" y2="0">
                                 <stop offset="0%" stopColor="#9ca3af" stopOpacity={0.1}/>
                                 <stop offset="80%" stopColor={trendAnalysis.diff > 0 ? "#10b981" : "#ef4444"} stopOpacity={0.2}/>
                             </linearGradient>
                         </defs>
-                        <Area type="monotone" dataKey="price" stroke={trendAnalysis.diff > 0 ? "#10b981" : "#ef4444"} strokeWidth={4} fill="url(#colorTrend)" animationDuration={1500}/>
+                        <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f5f5f4" />
+                        <XAxis 
+                            dataKey="date" 
+                            axisLine={false} 
+                            tickLine={false} 
+                            tick={{fontSize: 10, fill: '#a8a29e', fontWeight: 'bold'}} 
+                            tickFormatter={(str) => new Date(str).toLocaleDateString('en-GB', {day: 'numeric', month: 'short'})}
+                        />
+                        <YAxis 
+                            hide={true} 
+                            domain={['auto', 'auto']}
+                        />
+                        <Tooltip content={<CustomTooltip />} cursor={{ stroke: '#d6d3d1', strokeWidth: 1, strokeDasharray: '4 4' }} />
+                        <Area 
+                            type="monotone" 
+                            dataKey="price" 
+                            stroke={trendAnalysis.diff > 0 ? "#10b981" : "#ef4444"} 
+                            strokeWidth={3} 
+                            fill="url(#colorTrend)" 
+                            animationDuration={1500}
+                            dot={{ r: 4, fill: '#fff', strokeWidth: 2, stroke: trendAnalysis.diff > 0 ? "#10b981" : "#ef4444" }}
+                        />
                     </AreaChart>
                 </ResponsiveContainer>
                </div>
@@ -523,14 +640,15 @@ const BestMarketTab = ({ markets, prices, onRecordSale }) => {
     <div className="space-y-8 animate-in fade-in duration-500">
       <div className="bg-white rounded-3xl p-8 border border-stone-200 shadow-sm relative overflow-hidden">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-8 relative z-10">
-            <div className="max-w-md">
+             <div className="max-w-md">
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-100 text-emerald-700 text-xs font-bold uppercase tracking-wider mb-4"><DollarSign className="w-3 h-3" /> Profit Engine</div>
-                <h3 className="text-3xl font-black mb-2 tracking-tight text-gray-900">Calculate Your Profit</h3>
-                <p className="text-gray-500 text-base leading-relaxed">Transport costs are fixed. Find the tipping point where bulk selling justifies traveling to further markets.</p>
+                <h3 className="text-3xl font-bold mb-2 tracking-tight text-stone-800">Calculate Your Profit</h3>
+                <p className="text-stone-500 text-base leading-relaxed">Transport costs are fixed. Find the tipping point where bulk selling justifies traveling to further markets.</p>
+                <p className="text-sm font-bold text-stone-400 mt-2 italic">"Piga hesabu chagua soko."</p>
             </div>
-            <div className="flex-shrink-0 bg-stone-50 p-6 rounded-2xl border border-stone-100 flex flex-col items-center gap-3 min-w-[200px]">
-                <label className="text-gray-400 text-xs font-bold uppercase tracking-widest">Quantity to Sell</label>
-                <div className="flex items-baseline gap-2"><input type="number" min="1" value={quantity} onChange={(e) => setQuantity(Number(e.target.value))} className="w-32 bg-transparent text-5xl font-black text-center text-gray-900 focus:outline-none border-b-2 border-emerald-500 focus:border-emerald-600 transition-all placeholder-gray-300" /><span className="text-gray-400 text-lg font-bold">Kgs</span></div>
+            <div className="flex-shrink-0 bg-stone-50 p-6 rounded-3xl border border-stone-100 flex flex-col items-center gap-3 min-w-[200px]">
+                <label className="text-stone-400 text-xs font-bold uppercase tracking-widest">Quantity to Sell</label>
+                <div className="flex items-baseline gap-2"><input type="number" min="1" value={quantity} onChange={(e) => setQuantity(Number(e.target.value))} className="w-32 bg-transparent text-5xl font-bold text-center text-stone-900 focus:outline-none border-b-2 border-emerald-500 focus:border-emerald-600 transition-all placeholder-stone-300" /><span className="text-stone-400 text-lg font-bold">Kgs</span></div>
             </div>
         </div>
       </div>
@@ -540,23 +658,23 @@ const BestMarketTab = ({ markets, prices, onRecordSale }) => {
             <div key={rec.produce} className="bg-white rounded-3xl shadow-sm border border-stone-100 overflow-hidden group hover:border-emerald-200 transition-all duration-300">
                 <div className="p-1 bg-gradient-to-r from-emerald-500 to-teal-400 opacity-0 group-hover:opacity-100 transition-opacity"></div>
                 <div className="p-6 md:p-8">
-                    <div className="flex justify-between items-start mb-8">
+                     <div className="flex justify-between items-start mb-8">
                         <div>
-                            <p className="text-sm font-bold text-emerald-600 mb-1 flex items-center gap-1">Best Market for <span className="text-gray-900 text-lg ml-1">{rec.produce}</span></p>
-                            <h2 className="text-4xl font-black text-gray-900 tracking-tight">{rec.bestOption.market}</h2>
+                            <p className="text-sm font-bold text-emerald-600 mb-1 flex items-center gap-1">Best Market for <span className="text-stone-800 text-lg ml-1">{rec.produce}</span></p>
+                            <h2 className="text-4xl font-bold text-stone-800 tracking-tight">{rec.bestOption.market}</h2>
                         </div>
-                        <div className={`px-6 py-4 rounded-2xl text-center min-w-[160px] ${rec.bestOption.netValue > 0 ? 'bg-emerald-50 text-emerald-800' : 'bg-red-50 text-red-800'}`}>
-                            <p className="text-[10px] font-bold uppercase tracking-widest opacity-70 mb-1">Net Profit</p>
-                            <p className="text-2xl font-black">KES {rec.bestOption.netValue.toLocaleString()}</p>
+                        <div className={`px-6 py-4 rounded-3xl text-center min-w-[160px] ${rec.bestOption.netValue > 0 ? 'bg-emerald-50 text-emerald-800' : 'bg-red-50 text-red-800'}`}>
+                            <p className="text-[10px] font-bold uppercase tracking-widest opacity-70 mb-1">Pesa Mfukoni</p>
+                            <p className="text-2xl font-bold">KES {rec.bestOption.netValue.toLocaleString(undefined, {maximumFractionDigits: 0})}</p>
                         </div>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-                        <div className="bg-stone-50 p-5 rounded-2xl border border-stone-100"><p className="text-xs font-bold text-gray-400 uppercase mb-1">Selling Price</p><p className="text-xl font-bold text-gray-900">KES {rec.bestOption.pricePerKg}<span className="text-sm font-normal text-gray-500">/kg</span></p></div>
-                        <div className="bg-stone-50 p-5 rounded-2xl border border-stone-100"><p className="text-xs font-bold text-gray-400 uppercase mb-1">Gross Revenue</p><p className="text-xl font-bold text-gray-900">KES {(rec.bestOption.totalRevenue).toLocaleString()}</p></div>
-                        <div className="bg-stone-50 p-5 rounded-2xl border border-stone-100"><p className="text-xs font-bold text-gray-400 uppercase mb-1">Total Cost</p><p className="text-xl font-bold text-red-600">KES {rec.bestOption.totalCost.toLocaleString()}</p></div>
+                        <div className="bg-stone-50 p-5 rounded-2xl border border-stone-100"><p className="text-xs font-bold text-stone-400 uppercase mb-1">Selling Price</p><p className="text-xl font-bold text-stone-900">KES {rec.bestOption.pricePerKg}<span className="text-sm font-normal text-stone-500">/kg</span></p></div>
+                        <div className="bg-stone-50 p-5 rounded-2xl border border-stone-100"><p className="text-xs font-bold text-stone-400 uppercase mb-1">Gross Revenue</p><p className="text-xl font-bold text-stone-900">KES {(rec.bestOption.totalRevenue).toLocaleString()}</p></div>
+                        <div className="bg-stone-50 p-5 rounded-2xl border border-stone-100"><p className="text-xs font-bold text-stone-400 uppercase mb-1">Total Cost</p><p className="text-xl font-bold text-red-600">KES {rec.bestOption.totalCost.toLocaleString()}</p></div>
                     </div>
                     <div className="flex flex-col gap-4">
-                        <button onClick={() => onRecordSale({ produce: rec.produce, market: rec.bestOption.market, marketId: rec.bestOption.marketId, quantity: quantity, pricePerKg: rec.bestOption.pricePerKg, totalRevenue: rec.bestOption.totalRevenue, profit: rec.bestOption.netValue })} className="w-full py-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl shadow-lg shadow-emerald-200/50 flex items-center justify-center gap-2 transition-transform active:scale-[0.98]"><Plus className="w-5 h-5"/> Record Sale</button>
+                        <button onClick={() => onRecordSale({ produce: rec.produce, market: rec.bestOption.market, marketId: rec.bestOption.marketId, quantity: quantity, pricePerKg: rec.bestOption.pricePerKg, totalRevenue: rec.bestOption.totalRevenue, profit: rec.bestOption.netValue })} className="w-full py-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-2xl shadow-lg shadow-emerald-200/50 flex items-center justify-center gap-2 transition-transform active:scale-[0.98]"><Plus className="w-5 h-5"/> Record Sale</button>
                         {rec.alternatives.length > 0 && (
                             <div><button onClick={() => toggleExpanded(rec.produce)} className="w-full flex items-center justify-between text-sm text-gray-500 hover:text-emerald-600 transition-colors group mt-2 p-2 rounded-lg hover:bg-stone-50"><span>{rec.alternatives.length} other markets analyzed</span><span className="flex items-center gap-1 font-bold">{expanded[rec.produce] ? "Hide Breakdown" : "View Breakdown"} {expanded[rec.produce] ? <ChevronDown className="w-4 h-4"/> : <ChevronRight className="w-4 h-4"/>}</span></button>
                                 {expanded[rec.produce] && (
@@ -584,7 +702,7 @@ const BestMarketTab = ({ markets, prices, onRecordSale }) => {
 const SalesHistory = ({ sales, onDeleteSale }) => {
   const totalRevenue = sales.reduce((acc, sale) => acc + Number(sale.total_revenue || 0), 0);
   const totalVolume = sales.reduce((acc, sale) => acc + Number(sale.volume_sold || 0), 0);
-  if (sales.length === 0) return <div className="text-center p-16 bg-white rounded-3xl border border-dashed border-gray-300"><h3 className="text-xl font-bold text-gray-900">No Sales Recorded Yet</h3></div>;
+  if (sales.length === 0) return <div className="text-center p-16 bg-white rounded-3xl border border-dashed border-stone-200"><h3 className="text-xl font-bold text-stone-900">No Sales Recorded Yet</h3></div>;
   return (
     <div className="space-y-8 animate-in fade-in duration-500">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -594,15 +712,15 @@ const SalesHistory = ({ sales, onDeleteSale }) => {
         </div>
         <div className="bg-white rounded-3xl shadow-sm border border-stone-100 overflow-hidden">
             <div className="overflow-x-auto">
-            <table className="min-w-full"><thead className="bg-stone-50/50"><tr><th className="px-8 py-5 text-left text-xs font-bold text-gray-400 uppercase">Date</th><th className="px-8 py-5 text-left text-xs font-bold text-gray-400 uppercase">Produce</th><th className="px-8 py-5 text-left text-xs font-bold text-gray-400 uppercase">Market</th><th className="px-8 py-5 text-right text-xs font-bold text-gray-400 uppercase">Revenue</th><th className="px-8 py-5 text-center text-xs font-bold text-gray-400 uppercase">Action</th></tr></thead>
+            <table className="min-w-full"><thead className="bg-stone-50/80 backdrop-blur-sm"><tr><th className="px-8 py-5 text-left text-xs font-black text-stone-400 uppercase tracking-widest">Date</th><th className="px-8 py-5 text-left text-xs font-black text-stone-400 uppercase tracking-widest">Produce</th><th className="px-8 py-5 text-left text-xs font-black text-stone-400 uppercase tracking-widest">Market</th><th className="px-8 py-5 text-right text-xs font-black text-stone-400 uppercase tracking-widest">Revenue</th><th className="px-8 py-5 text-center text-xs font-black text-stone-400 uppercase tracking-widest">Action</th></tr></thead>
             <tbody className="divide-y divide-stone-100">
                 {sales.map((sale) => (
-                    <tr key={sale.id} className="hover:bg-emerald-50/30 transition-colors">
-                        <td className="px-8 py-5 text-sm text-gray-500">{sale.date}</td>
-                        <td className="px-8 py-5 font-bold text-gray-800">{sale.produce}</td>
-                        <td className="px-8 py-5 text-sm text-gray-600">{sale.market_sold_to}</td>
+                    <tr key={sale.id} className="hover:bg-emerald-50/40 transition-colors group">
+                        <td className="px-8 py-5 text-sm font-bold text-stone-500">{sale.date}</td>
+                        <td className="px-8 py-5 font-bold text-gray-900 group-hover:text-emerald-800 transition-colors">{sale.produce}</td>
+                        <td className="px-8 py-5 text-sm font-medium text-stone-600">{sale.market_sold_to}</td>
                         <td className="px-8 py-5 text-sm text-right font-black text-emerald-600">+ {Number(sale.total_revenue).toLocaleString()}</td>
-                        <td className="px-8 py-5 text-center"><button onClick={() => onDeleteSale(sale.id)} className="text-gray-400 hover:text-red-500 p-2 hover:bg-red-50 rounded-full"><Trash2 className="w-4 h-4"/></button></td>
+                        <td className="px-8 py-5 text-center"><button onClick={() => onDeleteSale(sale.id)} className="text-stone-300 hover:text-red-500 p-2 hover:bg-red-50 rounded-xl transition-colors"><Trash2 className="w-4 h-4"/></button></td>
                     </tr>
                 ))}
             </tbody></table>
@@ -614,17 +732,66 @@ const SalesHistory = ({ sales, onDeleteSale }) => {
 
 // 7. ABOUT TAB
 const AboutTab = () => (
-    <div className="max-w-2xl mx-auto space-y-8 animate-in fade-in duration-500">
-        <div className="bg-white p-8 rounded-3xl border border-stone-100 shadow-sm text-center">
-            <div className="bg-emerald-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 text-emerald-600"><BarChart2 className="w-10 h-10"/></div>
-            <h2 className="text-3xl font-black text-gray-900 mb-4">Ushauri Soko</h2>
-            <p className="text-gray-500 leading-relaxed mb-6">
-                A data-driven decision support system designed to help Kenyan smallholder farmers maximize profits. 
-                We use historical data, real-time prices, and transport costs to recommend the best market for your produce.
-            </p>
-            <div className="flex justify-center gap-4 text-sm font-bold text-gray-400">
-                <span>v1.0.0</span>
-                <span>•</span>
+    <div className="max-w-4xl mx-auto space-y-8 animate-in fade-in duration-500 pb-12">
+        {/* Header Section */}
+        <div className="bg-emerald-900 rounded-[3rem] p-12 text-center text-white relative overflow-hidden shadow-xl shadow-emerald-900/20">
+            {/* Background Decorations */}
+            <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4 pointer-events-none"></div>
+            <div className="absolute bottom-0 left-0 w-48 h-48 bg-emerald-400/10 rounded-full blur-3xl translate-y-1/3 -translate-x-1/4 pointer-events-none"></div>
+
+            <div className="relative z-10">
+                <div className="bg-white/10 w-24 h-24 rounded-3xl flex items-center justify-center mx-auto mb-8 backdrop-blur-sm border border-white/10 shadow-lg">
+                    <BarChart2 className="w-12 h-12 text-emerald-300" />
+                </div>
+                <h2 className="text-4xl md:text-5xl font-black mb-6 tracking-tight">Ushauri Soko</h2>
+                <p className="text-emerald-100/90 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed font-medium">
+                    Empowering farmers with data-driven market intelligence. We bridge the gap between farm and market, ensuring you always get the best price for your produce.
+                </p>
+            </div>
+        </div>
+
+        {/* Features Grid */}
+        <div className="grid md:grid-cols-3 gap-6">
+            <div className="bg-white p-8 rounded-3xl border border-stone-100 shadow-sm hover:shadow-md transition-all">
+                <div className="w-12 h-12 bg-blue-50 rounded-2xl flex items-center justify-center text-blue-600 mb-4 font-bold">
+                    <TrendingUp className="w-6 h-6" />
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-2">Price Forecasting</h3>
+                <p className="text-gray-500 leading-relaxed text-sm">
+                    Advanced algorithms analyze 7-day rolling averages to predict future price trends, helping you decide when to sell.
+                </p>
+            </div>
+
+            <div className="bg-white p-8 rounded-3xl border border-stone-100 shadow-sm hover:shadow-md transition-all">
+                <div className="w-12 h-12 bg-amber-50 rounded-2xl flex items-center justify-center text-amber-600 mb-4 font-bold">
+                    <DollarSign className="w-6 h-6" />
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-2">Profit Engine</h3>
+                <p className="text-gray-500 leading-relaxed text-sm">
+                    Don't just guess. Input your quantity, and our engine calculates net profit after transport and market fees.
+                </p>
+            </div>
+
+            <div className="bg-white p-8 rounded-3xl border border-stone-100 shadow-sm hover:shadow-md transition-all">
+                 <div className="w-12 h-12 bg-purple-50 rounded-2xl flex items-center justify-center text-purple-600 mb-4 font-bold">
+                    <Wifi className="w-6 h-6" />
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-2">Real-Time Data</h3>
+                <p className="text-gray-500 leading-relaxed text-sm">
+                    Access up-to-the-minute market prices from 50+ major markets across Kenya. Powered by reliable field data.
+                </p>
+            </div>
+        </div>
+
+        {/* Contact/Credits */}
+        <div className="bg-stone-50 rounded-3xl p-8 border border-stone-100 flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
+            <div>
+                 <h4 className="font-bold text-gray-900 text-lg mb-1">Need specific market data?</h4>
+                 <p className="text-gray-500 text-sm">Contact the administration for custom reports and API access.</p>
+            </div>
+            <div className="flex items-center gap-4 text-sm font-bold text-gray-400 bg-white px-6 py-3 rounded-xl border border-stone-200 shadow-sm">
+                <span>Version 1.2.0</span>
+                <span className="w-1 h-1 bg-gray-300 rounded-full"></span>
                 <span>Mama Ngina University</span>
             </div>
         </div>
@@ -633,8 +800,9 @@ const AboutTab = () => (
 
 // --- MAIN APP ---
 function App() {
-  const [token, setToken] = useState(localStorage.getItem('access_token'));
-  const [user, setUser] = useState(localStorage.getItem('username'));
+  const [token, setToken] = useState(sessionStorage.getItem('access_token'));
+  const [user, setUser] = useState(sessionStorage.getItem('username'));
+  const [isAdmin, setIsAdmin] = useState(sessionStorage.getItem('is_staff') === 'true');
   const [activeTab, setActiveTab] = useState("dashboard");
   const [markets, setMarkets] = useState([]);
   const [prices, setPrices] = useState([]);
@@ -648,14 +816,24 @@ function App() {
   const [showLanding, setShowLanding] = useState(!token);
 
   const openRecordSaleModal = (data) => { setModalData(data); setIsModalOpen(true); };
-  const handleLogin = (accessToken, username) => {
-    localStorage.setItem('access_token', accessToken); localStorage.setItem('username', username);
-    setToken(accessToken); setUser(username);
+  const handleLogin = (accessToken, username, isStaff) => {
+    sessionStorage.setItem('access_token', accessToken); 
+    sessionStorage.setItem('username', username);
+    sessionStorage.setItem('is_staff', isStaff);
+    
+    setToken(accessToken); 
+    setUser(username);
+    setIsAdmin(isStaff);
     setShowLanding(false);
   };
   const handleLogout = () => {
-    localStorage.removeItem('access_token'); localStorage.removeItem('username');
-    setToken(null); setUser(null);
+    sessionStorage.removeItem('access_token'); 
+    sessionStorage.removeItem('username');
+    sessionStorage.removeItem('is_staff');
+    
+    setToken(null); 
+    setUser(null);
+    setIsAdmin(false);
     setShowLanding(true);
   };
 
@@ -701,16 +879,21 @@ function App() {
 
   if (showLanding && !token) return <LandingPage onLoginClick={() => setShowLanding(false)} />;
   if (!token && !showLanding) return <LoginScreen onLogin={handleLogin} />;
+  
+  // NEW: Admin Dashboard Render
+  if (isAdmin) {
+      return <AdminDashboard token={token} onLogout={handleLogout} />;
+  }
 
   return (
     <div className="min-h-screen bg-stone-50 font-sans text-gray-800 pb-20 relative">
       <RecordSaleModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} saleData={modalData} token={token} />
       <nav className="bg-white sticky top-0 z-30 border-b border-stone-100/80 backdrop-blur-md bg-white/90">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-20">
-            <div className="flex items-center gap-3 cursor-pointer" onClick={() => setActiveTab("dashboard")}>
-                <div className="bg-emerald-600 p-2.5 rounded-xl text-white shadow-lg shadow-emerald-600/20"><BarChart2 className="w-6 h-6" /></div>
+             <div className="flex items-center gap-3 cursor-pointer" onClick={() => setActiveTab("dashboard")}>
+                <div className="bg-emerald-600 p-2.5 rounded-2xl text-white shadow-lg shadow-emerald-200/50"><BarChart2 className="w-6 h-6" /></div>
                 <div className="flex flex-col">
-                    <span className="font-black text-xl text-gray-900 tracking-tight leading-none">Ushauri Soko</span>
+                    <span className="font-bold text-xl text-stone-800 tracking-tight leading-none">Ushauri Soko</span>
                     <span className="text-emerald-600 text-xs font-bold tracking-wide uppercase mt-0.5">Market Intelligence</span>
                 </div>
             </div>
@@ -718,19 +901,27 @@ function App() {
               <div className={`hidden md:flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold border transition-all ${isUsingRealData ? "bg-emerald-50 border-emerald-100 text-emerald-700" : "bg-orange-50 border-orange-100 text-orange-700"}`}>
                   {isUsingRealData ? <Wifi className="w-3.5 h-3.5"/> : <WifiOff className="w-3.5 h-3.5"/>} {isUsingRealData ? "Live Database" : "Demo Mode"}
               </div>
-              <div className="flex items-center gap-2 text-sm font-bold text-gray-700"><div className="bg-stone-100 p-2 rounded-full text-gray-500"><User className="w-4 h-4"/></div><span className="hidden sm:block">{user}</span></div>
-              <button onClick={handleLogout} className="text-gray-400 hover:text-red-500 transition-colors p-2 rounded-lg hover:bg-red-50" title="Logout"><LogOut className="w-5 h-5"/></button>
+              <div className="flex items-center gap-2 text-sm font-bold text-stone-700"><div className="bg-stone-100 p-2 rounded-full text-stone-500"><User className="w-4 h-4"/></div><span className="hidden sm:block">{user}</span></div>
+              <button onClick={handleLogout} className="text-stone-400 hover:text-red-500 transition-colors p-2 rounded-xl hover:bg-red-50" title="Logout"><LogOut className="w-5 h-5"/></button>
             </div>
         </div>
       </nav>
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
         <div className="flex justify-center mb-12">
-            <div className="bg-white p-1.5 rounded-2xl shadow-sm border border-stone-100 inline-flex items-center gap-1 overflow-x-auto max-w-full">
+            <div className="bg-white p-1.5 rounded-full shadow-[0_2px_8px_rgba(0,0,0,0.04)] border border-stone-100 inline-flex items-center gap-1 overflow-x-auto max-w-full">
+            <div className="bg-white p-1.5 rounded-full shadow-[0_2px_8px_rgba(0,0,0,0.04)] border border-stone-100 inline-flex items-center gap-1 overflow-x-auto max-w-full">
                 {["dashboard", "markets", "prices", "trends", "best market", "reports", "about"].map((tab) => (
-                    <button key={tab} onClick={() => setActiveTab(tab)} className={`px-6 py-3 text-sm font-bold rounded-xl transition-all duration-300 whitespace-nowrap ${activeTab === tab ? 'bg-emerald-600 text-white shadow-md shadow-emerald-600/20' : 'text-gray-500 hover:bg-stone-50 hover:text-gray-900'}`}>
-                        {tab.charAt(0).toUpperCase() + tab.slice(1)}
+                    <button key={tab} onClick={() => setActiveTab(tab)} className={`px-6 py-3 text-sm font-bold rounded-full transition-all duration-300 whitespace-nowrap flex flex-col items-center leading-none gap-1 ${activeTab === tab ? 'bg-emerald-600 text-white shadow-md shadow-emerald-200' : 'text-stone-500 hover:bg-stone-50 hover:text-stone-900'}`}>
+                        <span>{tab.charAt(0).toUpperCase() + tab.slice(1)}</span>
+                        {tab === "dashboard" && <span className="text-[9px] opacity-70 font-normal">Nyumbani</span>}
+                        {tab === "markets" && <span className="text-[9px] opacity-70 font-normal">Soko</span>}
+                        {tab === "prices" && <span className="text-[9px] opacity-70 font-normal">Bei</span>}
+                        {tab === "trends" && <span className="text-[9px] opacity-70 font-normal">Mwelekeo</span>}
+                        {tab === "best market" && <span className="text-[9px] opacity-70 font-normal">Faida</span>}
+                        {tab === "reports" && <span className="text-[9px] opacity-70 font-normal">Ripoti</span>}
                     </button>
                 ))}
+            </div>
             </div>
         </div>
         
