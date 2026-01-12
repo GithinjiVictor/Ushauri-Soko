@@ -16,22 +16,26 @@ class Produce(models.Model):
         return self.name
 
 class PriceLog(models.Model):
-    market = models.ForeignKey(Market, on_delete=models.CASCADE)
-    produce = models.ForeignKey(Produce, on_delete=models.CASCADE)
+    market = models.ForeignKey(Market, on_delete=models.CASCADE, db_index=True)
+    produce = models.ForeignKey(Produce, on_delete=models.CASCADE, db_index=True)
     price = models.DecimalField(max_digits=10, decimal_places=2)
-    date = models.DateField()
+    date = models.DateField(db_index=True)
 
     class Meta:
         ordering = ['-date']
+        indexes = [
+            models.Index(fields=['date', 'produce']),
+            models.Index(fields=['market', 'produce']),
+        ]
 
     def __str__(self):
         return f"{self.produce.name} price at {self.market.name} on {self.date}"
 
 class SalesRecord(models.Model):
-    date = models.DateField()
-    produce = models.ForeignKey(Produce, on_delete=models.CASCADE)
+    date = models.DateField(db_index=True)
+    produce = models.ForeignKey(Produce, on_delete=models.CASCADE, db_index=True)
     volume_sold = models.FloatField()
-    market_sold_to = models.ForeignKey(Market, on_delete=models.CASCADE)
+    market_sold_to = models.ForeignKey(Market, on_delete=models.CASCADE, db_index=True)
     actual_price_per_unit = models.DecimalField(max_digits=10, decimal_places=2)
     total_revenue = models.DecimalField(max_digits=12, decimal_places=2)
 

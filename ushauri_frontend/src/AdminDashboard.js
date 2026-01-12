@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import {
     Users, ShoppingCart, TrendingUp, Truck, Plus, Trash2,
-    LogOut, Shield, DollarSign, Pencil, X
+    LogOut, Shield, DollarSign, Pencil, X, Upload
 } from 'lucide-react';
 
 const API_BASE_URL = "http://127.0.0.1:8000";
@@ -81,6 +81,7 @@ const AdminDashboard = ({ token, onLogout }) => {
                         { id: 'logs', label: 'Price Logs', icon: <TrendingUp className="w-5 h-5" /> },
                         { id: 'sales', label: 'Sales Records', icon: <DollarSign className="w-5 h-5" /> },
                         { id: 'users', label: 'User Mgmt', icon: <Users className="w-5 h-5" /> },
+                        { id: 'import', label: 'Bulk Import', icon: <Upload className="w-5 h-5" /> },
                     ].map(item => (
                         <button
                             key={item.id}
@@ -123,6 +124,7 @@ const AdminDashboard = ({ token, onLogout }) => {
                         {activeTab === 'logs' && <PriceLogManager logs={priceLogs} setLogs={setPriceLogs} markets={markets} produce={produce} token={token} onDelete={(id) => handleDelete('pricelogs', id, setPriceLogs, priceLogs)} />}
                         {activeTab === 'sales' && <SalesViewer sales={sales} users={users} />}
                         {activeTab === 'users' && <UserManager users={users} setUsers={setUsers} token={token} onDelete={(id) => handleDelete('users', id, setUsers, users)} />}
+                        {activeTab === 'import' && <BulkImportManager token={token} />}
                     </div>
                 )}
             </main>
@@ -410,6 +412,103 @@ const UserManager = ({ users, setUsers, token, onDelete }) => {
                     <thead className="bg-emerald-50/50"><tr><th className="px-6 py-4 text-left font-bold text-gray-400 uppercase text-xs">ID</th><th className="px-6 py-4 text-left font-bold text-gray-600">Username</th><th className="px-6 py-4 text-left font-bold text-gray-600">Role</th><th className="px-6 py-4 text-center font-bold text-gray-400">Action</th></tr></thead>
                     <tbody className="divide-y divide-gray-100">{users.map(u => (<tr key={u.id} className="hover:bg-gray-50/50"><td className="px-6 py-4 text-gray-500">#{u.id}</td><td className="px-6 py-4 font-bold text-gray-900">{u.username}</td><td className="px-6 py-4"><span className={`px-2 py-1 rounded text-xs font-bold uppercase tracking-wider ${u.is_staff ? 'bg-purple-100 text-purple-700' : 'bg-green-100 text-green-700'}`}>{u.is_staff ? 'Admin' : 'Farmer'}</span></td><td className="px-6 py-4 text-center"><button onClick={() => onDelete(u.id)} className="text-red-400 hover:text-red-600 hover:bg-red-50 p-2 rounded-lg transition-colors"><Trash2 className="w-4 h-4" /></button></td></tr>))}</tbody>
                 </table>
+            </div>
+        </div>
+    );
+};
+
+const BulkImportManager = ({ token }) => {
+    const [file, setFile] = useState(null);
+    const [type, setType] = useState('markets');
+    const [message, setMessage] = useState('');
+
+    const handleUpload = async (e) => {
+        e.preventDefault();
+        if (!file) {
+            alert("Please select a file first.");
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append('file', file);
+
+        try {
+            const res = await fetch(`${API_BASE_URL}/api/import/${type}/`, {
+                method: 'POST',
+                headers: { 'Authorization': `Bearer ${token}` }, // Form-data headers are handled automatically
+                body: formData
+            });
+            const data = await res.json();
+            if (res.ok) {
+                setMessage(data.message);
+                setFile(null);
+            } else {
+                setMessage("Error: " + data.error);
+            }
+        } catch (error) {
+            setMessage("Upload failed.");
+        }
+    };
+
+    return (
+        <div className="bg-white p-6 rounded-2xl shadow-sm border border-stone-100 max-w-2xl mx-auto">
+            <h3 className="text-xl font-bold mb-6 flex items-center gap-2">
+                <Upload className="w-6 h-6 text-emerald-600" /> Bulk Data Import
+            </h3>
+
+            <form onSubmit={handleUpload} className="space-y-6">
+                <div>
+                    <label className="block text-sm font-bold text-gray-700 mb-2">Select Data Type</label>
+                    <select
+                        value={type}
+                        onChange={(e) => setType(e.target.value)}
+                        className="w-full px-4 py-3 bg-gray-50 rounded-xl border border-gray-200 focus:ring-2 focus:ring-emerald-500 outline-none"
+                    >
+                        <option value="markets">Markets</option>
+                        <option value="produce">Produce</option>
+                        <option value="pricelogs">Price Logs</option>
+                        <option value="users">Users</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label className="block text-sm font-bold text-gray-700 mb-2">Upload Excel File (.xlsx)</label>
+                    <input
+                        type="file"
+                        accept=".xlsx, .xls"
+                        onChange={(e) => setFile(e.target.files[0])}
+                        className="block w-full text-sm text-slate-500
+                          file:mr-4 file:py-2 file:px-4
+                          file:rounded-full file:border-0
+                          file:text-sm file:font-semibold
+                          file:bg-emerald-50 file:text-emerald-700
+                          hover:file:bg-emerald-100"
+                    />
+                </div>
+
+                <button
+                    type="submit"
+                    disabled={!file}
+                    className="w-full py-3 bg-emerald-600 text-white font-bold rounded-xl shadow-lg hover:bg-emerald-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                >
+                    Upload and Import
+                </button>
+
+                {message && (
+                    <div className={`p-4 rounded-xl text-sm font-bold ${message.includes('Error') || message.includes('failed') ? 'bg-red-50 text-red-600' : 'bg-green-50 text-green-600'}`}>
+                        {message}
+                    </div>
+                )}
+            </form>
+
+            <div className="mt-8 pt-8 border-t border-gray-100">
+                <h4 className="text-sm font-bold text-gray-500 uppercase mb-4">Instructions</h4>
+                <ul className="text-sm text-gray-600 space-y-2 list-disc pl-5">
+                    <li><strong>Markets</strong>: Columns 'Name', 'Transport Cost', 'Market Fee'</li>
+                    <li><strong>Produce</strong>: Columns 'Name', 'Unit'</li>
+                    <li><strong>Price Logs</strong>: Columns 'Market', 'Produce', 'Price', 'Date' (YYYY-MM-DD)</li>
+                    <li><strong>Users</strong>: Columns 'Username', 'Password', 'Email', 'IsAdmin'</li>
+                </ul>
             </div>
         </div>
     );

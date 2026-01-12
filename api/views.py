@@ -59,10 +59,40 @@ class PriceLogViewSet(viewsets.ModelViewSet):
     serializer_class = PriceLogSerializer
     permission_classes = [IsAdminOrReadOnly]
 
+    def get_queryset(self):
+        queryset = super().get_queryset().select_related('market', 'produce')
+        start_date = self.request.query_params.get('start_date')
+        end_date = self.request.query_params.get('end_date')
+        produce_id = self.request.query_params.get('produce')
+        market_id = self.request.query_params.get('market')
+
+        if start_date:
+            queryset = queryset.filter(date__gte=start_date)
+        if end_date:
+            queryset = queryset.filter(date__lte=end_date)
+        if produce_id:
+            queryset = queryset.filter(produce_id=produce_id)
+        if market_id:
+            queryset = queryset.filter(market_id=market_id)
+            
+        return queryset
+
 class SalesRecordViewSet(viewsets.ModelViewSet):
     queryset = SalesRecord.objects.all().order_by('-date')
     serializer_class = SalesRecordSerializer
     permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        queryset = super().get_queryset().select_related('market_sold_to', 'produce')
+        start_date = self.request.query_params.get('start_date')
+        end_date = self.request.query_params.get('end_date')
+
+        if start_date:
+            queryset = queryset.filter(date__gte=start_date)
+        if end_date:
+            queryset = queryset.filter(date__lte=end_date)
+            
+        return queryset
 
 # --- NEW PREDICTION ENGINE (Simple Moving Average) ---
 class PriceForecastViewSet(viewsets.ViewSet):
@@ -228,3 +258,53 @@ class BacktestViewSet(viewsets.ViewSet):
                 "uplift_percent": round(uplift_percentage, 1)
             }
         })
+
+# --- EXPORT & IMPORT VIEWS ---
+from .utils import export_to_excel, export_to_pdf, import_markets, import_produce, import_pricelogs, import_users
+from rest_framework.parsers import MultiPartParser, FormParser
+
+class ExportSalesView(APIView):
+    permission_classes = [IsAuthenticated]
+    def get(self, request):
+        return export_to_excel(SalesRecord.objects.all(), 'SalesRecord')
+
+class ExportSalesPDFView(APIView):
+    permission_classes = [IsAuthenticated]
+    def get(self, request):
+        return export_to_pdf(SalesRecord.objects.all(), 'SalesRecord', title="Sales Report")
+
+class ExportPricesView(APIView):
+    permission_classes = [IsAuthenticated]
+    def get(self, request):
+        return export_to_excel(PriceLog.objects.all(), 'PriceLog')
+
+class ExportPricesPDFView(APIView):
+    permission_classes = [IsAuthenticated]
+    def get(self, request):
+        return export_to_pdf(PriceLog.objects.all(), 'PriceLog', title="Price Logs Report")
+
+class BulkImportView(APIView):
+    permission_classes = [IsAdminUser]
+    parser_classes = [MultiPartParser, FormParser]
+
+    def post(self, request, type=None):
+        if 'file' not in request.FILES:
+            return Response({"error": "No file uploaded"}, status=400)
+        
+        file = request.FILES['file']
+        
+        if type == 'markets':
+            result = import_markets(file)
+        elif type == 'produce':
+            result = import_produce(file)
+        elif type == 'pricelogs':
+            result = import_pricelogs(file)
+        elif type == 'users':
+            result = import_users(file)
+        else:
+            return Response({"error": "Invalid type. Options: markets, produce, pricelogs, users"}, status=400)
+            
+        if result['success']:
+            return Response({"message": f"Successfully imported {result['count']} entries."})
+        else:
+            return Response({"error": result['error']}, status=400)

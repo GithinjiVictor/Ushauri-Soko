@@ -18,7 +18,12 @@ from api.views import (
      PriceForecastViewSet,
      BacktestViewSet,
      UserViewSet,
-     CustomTokenObtainPairView
+     CustomTokenObtainPairView,
+     ExportSalesView,
+     ExportSalesPDFView,
+     ExportPricesView,
+     ExportPricesPDFView,
+     BulkImportView
 )
 
 router = routers.DefaultRouter()
@@ -43,4 +48,11 @@ urlpatterns = [
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'), # Refresh Session
     
     path('api/latest-prices/', LatestPricesViewSet.as_view({'get': 'list'}), name='latest-prices'),
+    
+    # --- EXPORT/IMPORT ---
+    path('api/export/sales/', ExportSalesView.as_view(), name='export-sales'),
+    path('api/export/sales/pdf/', ExportSalesPDFView.as_view(), name='export-sales-pdf'),
+    path('api/export/prices/', ExportPricesView.as_view(), name='export-prices'),
+    path('api/export/prices/pdf/', ExportPricesPDFView.as_view(), name='export-prices-pdf'),
+    path('api/import/<str:type>/', BulkImportView.as_view(), name='bulk-import'),
 ]
